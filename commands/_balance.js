@@ -13,7 +13,7 @@ CMD*/
 let res = Libs.ResourcesLib.userRes("coin");
 let ratio = res.value();
 
-let price =   "_in Dogecoin: _" + (ratio / 50)+ "\n" ;
+let price =   "_in Dogecoin: _" + (ratio / 20)+ "\n" ;
  //"_in Bitcoin(satoshi): _" + (ratio * 0.4)+ "\n" +
 /*  "_in Ethereum: _" + (ratio * 0.000000189) + "\n" +
   "_in Dash: _" + (ratio * 0.000000388) + "\n" +

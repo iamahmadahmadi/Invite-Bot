@@ -9,10 +9,25 @@
   aliases: 🏠 menu
 CMD*/
 
-var refUser = Libs.ReferralLib.currentUser.attractedByUser() ;
- if (refUser != null){
-let refUserBonus = Libs.ResourcesLib.anotherUserRes("coin", refUser.telegramid);
-  refUserBonus.add(20);  // add 100 bonus for friend
-Bot.sendMessageToChatWithId(refUser.id,"_A friend signed up with your link!_ \n *+20 Coins*");
+//Variable which checks if this user registered before or not
+var registered = Libs.ResourcesLib.userRes("registered")
+//Variable which checks if this user is active or not (has referrals)
+var active = Libs.ResourcesLib.userRes("active")
+//Referrer Account
+var refUser = Libs.ReferralLib.currentUser.attractedByUser()
+//Variable which checks if referrer is active or not (has referrals)
+
+if (refUser != null) {
+  let refcommand = "/payreferrer " + refUser.telegramid
+  //let refUserBonus = Libs.ResourcesLib.anotherUserRes("coin", refUser.telegramid);
+  let activeReferral = Libs.ResourcesLib.anotherUserRes(
+    "active",
+    refUser.telegramid
+  )
+  if (registered.value() == 0) {
+    Bot.runCommand(refcommand)
+    activeReferral.set(1)
+  } // add 100 bonus for friend
 }
+registered.set(1)
 

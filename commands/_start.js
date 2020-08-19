@@ -4,22 +4,27 @@
   need_reply: 
   auto_retry_time: 
   folder: 
-  answer: Do You Know Faucet Crypto™?
-  keyboard: Yes,No
+
+  <<ANSWER
+
+  ANSWER
+
+  <<KEYBOARD
+
+  KEYBOARD
   aliases: 
 CMD*/
 
 
 
-function doTouchOwnLink(){
-  Bot.sendMessage("You should send this link to others!");
+function doTouchOwnLink() {
+  Bot.sendMessage("You should send this link to others!")
 }
 
-function doAttracted(channel){
-}
+function doAttracted(channel) {}
 
-function doAtractedByUser(refUser){
- /* Bot.sendMessage("User: " + 
+function doAtractedByUser(refUser) {
+  /* Bot.sendMessage("User: " + 
     refUser.first_name + " (@" + refUser.username+") Entered via your link... But not signed up yet");
   
   Bot.sendMessageToChatWithId(refUser.chatId, 
@@ -27,8 +32,7 @@ function doAtractedByUser(refUser){
 */
 }
 
-function doAlreadyAttracted(){
-}
+function doAlreadyAttracted() {}
 
 let trackOptions = {
   onTouchOwnLink: doTouchOwnLink,
@@ -36,8 +40,13 @@ let trackOptions = {
   onAtractedByUser: doAtractedByUser,
   onAlreadyAttracted: doAlreadyAttracted
 }
-
-Libs.ReferralLib.currentUser.track(trackOptions);
-
-
+Libs.ReferralLib.currentUser.track(trackOptions)
+var registered = Libs.ResourcesLib.userRes("registered").value();
+if (registered == 1) {
+  Bot.runCommand("/sentreferrallink")
+}
+else
+{
+Bot.sendKeyboard("Yes,No","Do You Know Faucet Crypto™?")
+}
 
